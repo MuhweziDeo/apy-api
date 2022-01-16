@@ -51,3 +51,25 @@ export const calculateAPY = (req: Request, res: Response) => {
         });
     });
 };
+
+
+// export const retrieveCustomerCalculations = (req: Request, res: Response) => {
+//     const {customerId} = req.query
+
+//     let sql = `SELECT customerId total id,
+//            FROM calculations
+//            WHERE customerId  = ?`;
+//     return db.get(sql, [customerId], (error, result) => {
+//         if (error) {
+//             return res
+//                 .status(500)
+//                 .send({
+//                     message: 'Something went wrong',
+//                     success: false,
+//                     error,
+//                 });
+//         }
+
+//         return res.send({data: result});
+//     })
+// }
