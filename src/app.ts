@@ -1,14 +1,20 @@
 import express, { Application, Request, Response } from 'express';
-import { NODE_ENV, PORT } from './config';
+import { errors } from 'celebrate';
+import { API_PREFIX, NODE_ENV } from './config';
+import customersRouter from './customers';
+import { createCalculationsTable } from './db';
 
 const app: Application = express();
 
-const port: number = PORT;
+createCalculationsTable().then(console.log).catch(console.error);
+
+app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
     res.send({ message: 'API v1', NODE_ENV });
 });
 
-app.listen(port, function () {
-    console.log(`App is listening on port ${port} !`);
-});
+app.use(`${API_PREFIX}/customers`, customersRouter);
+app.use(errors());
+
+export default app;
