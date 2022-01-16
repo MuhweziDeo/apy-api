@@ -73,4 +73,22 @@ describe('Customer controller', () => {
             .expect(200);
         expect(response.body.nextPage).toBe(2);
     });
+
+    it('should delete all customer records succesfully', async () => {
+        // create dummy customer with Id 12345
+        await request(app)
+            .post('/api/v1/customers/calculate-apy')
+            .send({
+                deposit: 100,
+                interestRate: 0.05,
+                yearlyCompoundedTimes: 12,
+                customerId: '12345',
+            })
+            .expect(201);
+
+        const response = await request(app)
+            .delete('/api/v1/customers/12345')
+            .expect(200);
+        expect(response.body.message).toBe('Succesfully deleted all records');
+    });
 });

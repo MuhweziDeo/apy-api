@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { calculateAPY, retrieveCustomerCalculations } from './controller';
+import { calculateAPY, deleteCustomerCalculations, retrieveCustomerCalculations } from './controller';
 import { Joi, Segments, celebrate } from 'celebrate';
 const router = Router();
 
@@ -20,5 +20,7 @@ router.post(
 );
 
 router.get('/:customerId', retrieveCustomerCalculations);
+
+router.delete('/:customerId', deleteCustomerCalculations);
 
 export default router;
