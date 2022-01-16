@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import db from '../db';
+import { cacheItem, getCachedItem } from '../helpers/cache';
 
 export const calculateAPY = (req: Request, res: Response) => {
     //Assumptions
@@ -54,6 +55,16 @@ export const retrieveCustomerCalculations = (req: Request, res: Response) => {
     const { page = 1, limit = 10 } = req.query;
     const offset = Number(limit) * (Number(page) - 1);
     let sql = `SELECT * FROM calculations WHERE customerId = ? LIMIT ${limit} OFFSET ${offset}`;
+    const cachedResults = getCachedItem(`calculations_${page}`);
+    if(cachedResults) {
+        const result = JSON.parse(cachedResults);
+        return res.send({
+            data: result,
+            nextPage: result.length === Number(limit) ? Number(page) + 1 : null,
+            currentPage: page, 
+            showingCachedResults: true
+        })
+    }
 
     return db.all(sql, [customerId], (error, result) => {
         if (error) {
@@ -63,6 +74,10 @@ export const retrieveCustomerCalculations = (req: Request, res: Response) => {
                 error,
                 customerId,
             });
+        }
+
+        if(result.length) {
+            cacheItem(`calculations_${page}`, JSON.stringify(result)); 
         }
 
         return res.send({
