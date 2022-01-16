@@ -19,4 +19,6 @@ router.post(
     calculateAPY
 );
 
+// router.get('/:customerId', retrieveCustomerCalculations);
+
 export default router;
