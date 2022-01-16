@@ -72,3 +72,25 @@ export const retrieveCustomerCalculations = (req: Request, res: Response) => {
         });
     });
 };
+
+export const deleteCustomerCalculations = (req: Request, res: Response) => {
+    const { customerId } = req.params;
+    let sql = `DELETE FROM calculations WHERE customerId = ?`;
+
+    return db.all(sql, [customerId], (error, result) => {
+        if (error) {
+            return res.status(500).send({
+                message: 'Something went wrong',
+                success: false,
+                error,
+                customerId,
+            });
+        }
+
+        return res.send({
+            data: result,
+            message: 'Succesfully deleted all records'
+        });
+    });
+
+}
