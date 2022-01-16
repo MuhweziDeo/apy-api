@@ -2,9 +2,9 @@
     "name": "apy-api",
     "version": "1.0.0",
     "description": "",
-    "main": "src/app.ts",
+    "main": "index.ts",
     "scripts": {
-        "dev": "nodemon src/app.ts",
+        "dev": "nodemon index.ts",
         "lint": "prettier --write .",
         "test": "cross-env NODE_ENV=test DATABASE=:memory: jest --testTimeout=10000 --detectOpenHandles"
     },

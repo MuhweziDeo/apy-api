@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { calculateAPY } from './controller';
+import { calculateAPY, retrieveCustomerCalculations } from './controller';
 import { Joi, Segments, celebrate } from 'celebrate';
 const router = Router();
 
@@ -19,6 +19,6 @@ router.post(
     calculateAPY
 );
 
-// router.get('/:customerId', retrieveCustomerCalculations);
+router.get('/:customerId', retrieveCustomerCalculations);
 
 export default router;
