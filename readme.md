@@ -131,7 +131,7 @@ Endpoints for the API is described below.
 
 `POST /customers/calculate-apy`
 
-    curl -i -H 'Accept: application/json' -d 'name=Foo&status=new' http://localhost:8080/customers/calculate-apy
+    curl -i -H 'Accept: application/json' -d 'name=Foo&status=new' http://localhost:8080/api/v1/customers/calculate-apy
 ### Body
     {
     "customerId": "43321122",
@@ -169,7 +169,7 @@ Endpoints for the API is described below.
 
 `DELETE /customers/:customerId`
 
-    curl -i -H 'Accept: application/json' http://localhost:7000/thing/1
+    curl -i -H 'Accept: application/json' http://localhost:8080/api/v1/customers/12345
 
 ### Response
 
