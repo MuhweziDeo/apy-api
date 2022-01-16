@@ -61,7 +61,7 @@ export const retrieveCustomerCalculations = (req: Request, res: Response) => {
         return res.send({
             data: result,
             nextPage: result.length === Number(limit) ? Number(page) + 1 : null,
-            currentPage: page, 
+            currentPage: page,
             showingCachedResults: true
         })
     }
@@ -77,7 +77,7 @@ export const retrieveCustomerCalculations = (req: Request, res: Response) => {
         }
 
         if(result.length) {
-            cacheItem(`calculations_${page}`, JSON.stringify(result)); 
+            cacheItem(`calculations_${page}`, JSON.stringify(result));
         }
 
         return res.send({
@@ -104,7 +104,7 @@ export const deleteCustomerCalculations = (req: Request, res: Response) => {
 
         return res.send({
             data: result,
-            message: 'Succesfully deleted all records'
+            message: 'Successfully deleted all records'
         });
     });
 

@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../../app';
-import db from '../../db';
+
 
 describe('Customer controller', () => {
     it('should create calculation for user', async () => {
@@ -89,6 +89,6 @@ describe('Customer controller', () => {
         const response = await request(app)
             .delete('/api/v1/customers/12345')
             .expect(200);
-        expect(response.body.message).toBe('Succesfully deleted all records');
+        expect(response.body.message).toBe('Successfully deleted all records');
     });
 });
